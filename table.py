@@ -40,8 +40,8 @@ class Table:
 
         if table_name in str(table):
             conn.execute("DROP TABLE {}".format(table_name))
-
             print("\nSUCCESS")
+
         else:
             print("INVALID")
 
