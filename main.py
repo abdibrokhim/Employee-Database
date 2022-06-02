@@ -1,38 +1,44 @@
-import sqlite3
-
-from menu import Menu
-
-conn = sqlite3.connect('test.db')
-print("Opened database successfully")\
+from table import Table
 
 
-class Main:
-    def __init__(self, table_name, employee_name, employee_age, employee_address, employee_salary, employee_gender):
-        self.table_name = table_name
-        self.employee_name = employee_name
-        self.employee_age = employee_age
-        self.employee_address = employee_address
-        self.employee_salary = employee_salary
-        self.employee_gender = employee_gender
+def main():
+    table = Table()
+    c = 0
 
+    while True:
+        if c < 1:
+            print("\nWELCOME")
+        print("\n:: CHOOSE AN OPTION ::\n")
+        print("[1] -> CREATE NEW TABLE")
+        print("[2] -> DELETE TABLE")
+        print("[3] -> SHOW ALL TABLES")
+        print("[4] -> EXIT\n")
 
-    def main(self):
-        print("WELCOME")
-        Menu.menu()
+        choice = input("[?] -> ")
 
-    def create_table(table_name):
-        conn.execute(f'''CREATE TABLE {table_name}
-                 (ID INTEGER PRIMARY KEY     AUTOINCREMENT,
-                 NAME           TEXT         NOT NULL,
-                 AGE            INT          NOT NULL,
-                 ADDRESS        CHAR(50),
-                 SALARY         REAL);''')
-        print("Table created successfully")
+        try:
+            choice = int(choice)
+        except ValueError:
+            print("\nINVALID")
+            continue
 
-        conn.close()
+        if choice == 1:
+            table.create_table()
+            c += 1
+        elif choice == 2:
+            table.delete_table()
+            c += 1
+        elif choice == 3:
+            table.show_table()
+            c += 1
+        elif choice == 4:
+            exit()
+        else:
+            print("\nINVALID")
+            c += 14
 
-        add_table()
+    print("\nBYE\n")
 
 
 if __name__ == '__main__':
-    Main()
+    main()
