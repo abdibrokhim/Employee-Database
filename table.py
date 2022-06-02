@@ -1,18 +1,20 @@
+from data import Data
+
 import pandas as pd
 import sqlite3
 
 conn = sqlite3.connect('employee.db')
-print("Opened database successfully")
+print("DATABASE OPENED")
 
 
 class Table:
+
     def __init__(self):
         pass
 
     def create_table(self):
         print("\n:: NEW TABLE ::")
         table_name = str(input("\nInput table name: "))
-
 
         conn.execute('''CREATE TABLE {}
                  (ID            INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,43 +26,11 @@ class Table:
 
         print("\nSUCCESS")
 
-    def add_table_info(self):
-        print("\n:: FILL IN THE TABLE ::")
-        print("input 0 to leave blank\n")
-
-        employee_name = str(input("Input employee name: "))
-        employee_age = int(input("Input employee age: "))
-        employee_address = str(input("Input employee address: "))
-        employee_salary = float(input("Input employee salary: "))
-        employee_gender = str(input("Input employee gender: "))
-
-        conn.execute("INSERT INTO employee (NAME, AGE, ADDRESS, SALARY, GENDER)\
-        VALUES(?, ?, ?, ?, ?)", (employee_name, employee_age, employee_address, employee_salary, employee_gender))
-
-        conn.commit()
-
-        print("\nSUCCESS")
-
     def show_table(self):
         table = pd.read_sql_query("SELECT name FROM sqlite_master WHERE type='table'", conn)
         print("\n", table, "\n")
 
         print("\nSUCCESS")
-
-    def select_table_info(self):
-        data = conn.execute("SELECT id, name, address, salary, gender from employee")
-
-        for row in data:
-            print("ID = ", row[0])
-            print("NAME = ", row[1])
-            print("ADDRESS = ", row[2])
-            print("SALARY = ", row[3])
-            print("GENDER = ", row[4], "\n")
-
-        print("\nSUCCESS")
-
-    def update_table_info(self):
-        pass
 
     def delete_table(self):
         print("\n:: DELETE TABLE ::")
@@ -74,3 +44,38 @@ class Table:
             print("\nSUCCESS")
         else:
             print("INVALID")
+
+    def show_more(self):
+        data = Data()
+
+        while True:
+            print("\n:: CHOOSE AN OPTION ::\n")
+            print("[1] -> UPDATE TABLE DATA")
+            print("[2] -> DELETE TABLE DATA")
+            print("[3] -> ADD TABLE DATA")
+            print("[4] -> SELECT TABLE DATA")
+            print("[5] -> SHOW TABLE DATA")
+            print("[6] -> EXIT\n")
+
+            choice = input("[?] -> ")
+
+            try:
+                choice = int(choice)
+            except ValueError:
+                print("\nINVALID")
+                continue
+
+            if choice == 1:
+                data.update_table_data()
+            elif choice == 2:
+                data.delete_table_data()
+            elif choice == 3:
+                data.add_table_data()
+            elif choice == 4:
+                data.select_table_data()
+            elif choice == 5:
+                data.show_table_data()
+            elif choice == 6:
+                exit()
+            else:
+                print("\nINVALID")

@@ -1,6 +1,5 @@
 from table import Table
 
-
 def main():
     table = Table()
     c = 0
@@ -12,7 +11,8 @@ def main():
         print("[1] -> CREATE NEW TABLE")
         print("[2] -> DELETE TABLE")
         print("[3] -> SHOW ALL TABLES")
-        print("[4] -> EXIT\n")
+        print("[4] -> MORE")
+        print("[5] -> EXIT\n")
 
         choice = input("[?] -> ")
 
@@ -32,10 +32,13 @@ def main():
             table.show_table()
             c += 1
         elif choice == 4:
+            table.show_more()
+            c += 1
+        elif choice == 5:
             exit()
         else:
             print("\nINVALID")
-            c += 14
+            c += 1
 
     print("\nBYE\n")
 
