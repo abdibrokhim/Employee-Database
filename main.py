@@ -1,5 +1,6 @@
 from table import Table
 
+
 def main():
     table = Table()
     c = 0
