@@ -159,59 +159,14 @@ class Data:
             else:
                 print("\nINVALID")
 
-
     def delete_table_data(self):
         print("\n:: DELETE THE TABLE DATA ::")
         print("input null to delete data\n")
         table_name = str(input("Input table name: "))
 
-        Data.delete_table_data_set(self, table_name)
+        Data.delete_table_data_where(self, table_name)
 
-    def delete_table_data_set(self, table_name):
-        while True:
-            print("\n:: CHOOSE AN OPTION ::\n")
-            print("[1] -> DELETE NAME")
-            print("[2] -> DELETE AGE")
-            print("[3] -> DELETE ADDRESS")
-            print("[4] -> DELETE SALARY")
-            print("[5] -> DELETE GENDER")
-            print("[6] -> BACK\n")
-
-            choice = input("[?] -> ")
-
-            try:
-                choice = int(choice)
-            except ValueError:
-                print("\nINVALID")
-                continue
-
-            if choice == 1:
-                name = "NAME"
-                Data.delete_table_data_where(self, table_name, name)
-
-            elif choice == 2:
-                age = "AGE"
-                Data.delete_table_data_where(self, table_name, age)
-
-            elif choice == 3:
-                address = "ADDRESS"
-                Data.delete_table_data_where(self, table_name, address)
-
-            elif choice == 4:
-                salary = "SALARY"
-                Data.delete_table_data_where(self, table_name, salary)
-
-            elif choice == 5:
-                gender = "GENDER"
-                Data.delete_table_data_where(self, table_name, gender)
-
-            elif choice == 6:
-                # exit()
-                return False
-            else:
-                print("\nINVALID")
-
-    def delete_table_data_where(self, table, arg):
+    def delete_table_data_where(self, table):
         while True:
             print("\n:: CHOOSE AN OPTION ::\n")
             print("[1] -> WHERE NAME")
@@ -231,35 +186,35 @@ class Data:
 
             if choice == 1:
                 employee_name = str(input("where employee name: "))
-                conn.execute('UPDATE {} SET {} = ? WHERE NAME = ?'.format(table, arg), ("null", employee_name))
+                conn.execute('DELETE FROM {} WHERE NAME = {}'.format(table, employee_name))
                 conn.commit()
                 print("\nSUCCESS")
                 return False
 
             elif choice == 2:
                 employee_age = int(input("where employee age: "))
-                conn.execute('UPDATE {} SET {} = ? WHERE AGE = ?'.format(table, arg), ("null", employee_age))
+                conn.execute('DELETE FROM {} WHERE AGE = {}'.format(table, employee_age))
                 conn.commit()
                 print("\nSUCCESS")
                 return False
 
             elif choice == 3:
                 employee_address = str(input("where employee address: "))
-                conn.execute('UPDATE {} SET {} = ? WHERE ADDRESS = ?'.format(table, arg), ("null", employee_address))
+                conn.execute('DELETE FROM {} WHERE ADDRESS = {}'.format(table, employee_address))
                 conn.commit()
                 print("\nSUCCESS")
                 return False
 
             elif choice == 4:
                 employee_salary = float(input("where employee salary: "))
-                conn.execute('UPDATE {} SET {} = ? WHERE SALARY = ?'.format(table, arg), ("null", employee_salary))
+                conn.execute('DELETE FROM {} WHERE SALARY = {}'.format(table, employee_salary))
                 conn.commit()
                 print("\nSUCCESS")
                 return False
 
             elif choice == 5:
                 employee_gender = str(input("where employee gender: "))
-                conn.execute('UPDATE {} SET {} = ? WHERE GENDER = ?'.format(table, arg), ("null", employee_gender))
+                conn.execute('DELETE FROM {} WHERE GENDER = {}'.format(table, employee_gender))
                 conn.commit()
                 print("\nSUCCESS")
                 return False
@@ -271,7 +226,11 @@ class Data:
                 print("\nINVALID")
 
 
-
     def select_table_data(self):
-        print("\nin development ...")
-        return False
+        pass
+        # print("\n:: SELECT THE TABLE DATA ::")
+        # print("input null to delete data\n")
+        # table_name = str(input("Input table name: "))
+        #
+        # Data.select_table_data_set(self, table_name)
+
